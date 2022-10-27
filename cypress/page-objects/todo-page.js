@@ -31,6 +31,7 @@ export function navigate() {
   export function validateNumberOfTodosShown(expectedNumberOfTodos) {
     cy.get('.todo-list li12').should('have.length', expectedNumberOfTodos)
     cy.get('.todo-list lipo').should('have.length', expectedNumberOfTodos)
+    cy.get('.todo-list liabc').should('have.length', expectedNumberOfTodos)
   }
   
   export function validateTodoCompletedState(todoIndex, shouldBeCompleted) {
