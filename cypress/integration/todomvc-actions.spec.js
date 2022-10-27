@@ -1,37 +1,41 @@
 /// <reference types="cypress" />
+
+import {  navigate,addTodo,validateTodoText,validateToggleState, toggleTodo,clearCompleted, validateTodoCompletedState,validateNumberOfTodosShown } from "../page-objects/todo-page"
+
 describe('todo actions',()=>{
 
 beforeEach(()=>{
-    cy.visit('http://todomvc-app-for-testing.surge.sh')
+    navigate()
 
-    cy.get('.new-todo').type("Clean room{enter}")
+    addTodo("Clean room")
 })
 
 it('should add a new todo to the list',()=>{
 
 
-    cy.get('label').should('have.text','Clean room')
+    validateTodoText(0,'Clean room')
 
-    cy.get('.toggle').should('not.be.checked')
+    validateToggleState(0,false)
 
 })
 
 it('should mark a todo as completed',()=>{
 
-    cy.get('.toggle').click()
+   
+    toggleTodo(0)
 
-    cy.get('label').should('have.css','text-decoration-line','line-through')
-
+    validateTodoCompletedState(0, true)
+    
 
 })
 
 it('should clear completed todos',()=>{
 
-    cy.get('.toggle').click()
+    toggleTodo(0)
 
-    cy.contains('Clear').click()
+    clearCompleted()
 
-    cy.get('.todo-list').should('not.have.descendants','li')
+    validateNumberOfTodosShown(0)
 
 })
 
